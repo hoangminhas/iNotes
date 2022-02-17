@@ -32,8 +32,10 @@ switch ($page){
     case 'note-delete':
         $id = $_REQUEST['id'];
         $noteController->deleteNote($id);
+        break;
     case 'note-update':
-        $noteController->updateNote()
+        $noteController->updateNote($_GET['id']);
+        break;
     default:
 }
 ?>

@@ -44,4 +44,15 @@ class NoteModel
         $sql = "DELETE FROM note where id=$id";
         $this->konnekter->query($sql);
     }
+
+    public function updateById($id, $note)
+    {
+        $this->showDetail($id);
+        $sql = "update note join note_type on note.type_id = note_type.id set note.title=?, note_type.name=? where note.id=?";
+        $stmt = $this->konnekter->prepare($sql);
+        $stmt->bindParam(1, $note['title']);
+        $stmt->bindParam(2, $note['content']);
+        $stmt->bindParam(3, $id);
+        $stmt->execute();
+    }
 }

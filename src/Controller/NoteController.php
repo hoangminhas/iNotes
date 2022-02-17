@@ -45,4 +45,19 @@ class NoteController
         $this->noteModel->delete($id);
         header("location:index.php?page=note-list");
     }
+
+    public function updateNote($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "GET"){
+            $thisNote = $this->noteModel->showDetail($id);
+            include "src/View/update.php";
+        } else{
+            $note = [
+                'title' => $_POST['title'],
+                'content' => $_POST['content']
+            ];
+            $this->noteModel->updateById($id, $note);
+            header("location:index.php?page=note-list");
+        }
+    }
 }
